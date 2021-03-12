@@ -29,11 +29,11 @@ def show_category(request, category_name_slug):
         # Can we find a category name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception
-        category = Category.objects.get(slug=category_name_slug)
+        category = Category.objects.get(slug=category_name_slug).order_by('-views')
 
         # Retrieve all of the associated pages.
         # note that filter() will return a list of page objets or an empty list
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.order_by('-likes')
 
         # Adds our results list to the template context under name pages.
         context_dict['pages'] = pages

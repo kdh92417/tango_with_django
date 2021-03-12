@@ -11,45 +11,54 @@ def populate():
     python_pages = [
         {
             "title": "Official Python Tutorial",
-            "url":"http://docs.python.org/2/tutorial/"
+            "url":"http://docs.python.org/2/tutorial/",
+            "views" : 999
         },
         {
             "title":"How to Think like a Computer Scientist",
-            "url":"http://www.greenteapress.com/thinkpython/"
+            "url":"http://www.greenteapress.com/thinkpython/",
+            "views" : 129
         },
         {
             "title":"Learn Python in 10 Minutes",
-            "url":"http://www.korokithakis.net/tutorials/python/"
+            "url":"http://www.korokithakis.net/tutorials/python/",
+            "views" : 75
         }
     ]
 
     django_pages = [
         {
             "title":"Official Django Tutorial",
-            "url":"https://docs.djangoproject.com/en/1.9/intro/tutorial01/"
+            "url":"https://docs.djangoproject.com/en/1.9/intro/tutorial01/",
+            "views" : 32
         },
         {
             "title":"Django Rocks",
-            "url":"http://www.djangorocks.com/"
+            "url":"http://www.djangorocks.com/",
+            "views" : 854
         },
         {
             "title":"How to Tango with Django",
-            "url":"http://www.tangowithdjango.com/"
+            "url":"http://www.tangowithdjango.com/",
+            "views" : 543
         }
     ]
 
     other_pages = [
         {
             "title":"Official Django Tutorial",
-            "url":"https://docs.djangoproject.com/en/1.9/intro/tutorial01/"
+            "url":"https://docs.djangoproject.com/en/1.9/intro/tutorial01/",
+            "views" : 345
         },
         {
             "title":"Django Rocks",
-            "url":"http://www.djangorocks.com/"
+            "url":"http://www.djangorocks.com/",
+            "views" : 180
         },
         {
             "title":"How to Tango with Django",
-            "url":"http://www.tangowithdjango.com/"
+            "url":"http://www.tangowithdjango.com/",
+            "views" : 900
         }
     ]
 
@@ -77,14 +86,14 @@ def populate():
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data["views"], cat_data["likes"])    # cat : Python      52
         for p in cat_data["pages"]: # python_ages {}
-            add_page(c, p["title"], p["url"])
+            add_page(c, p["title"], p["url"], p["views"])
 
     # Print out the categories we have added
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
             print("- {0} - {1}".format(str(c), str(p)))
 
-def add_page(cat, title, url, views=0): # python, title, url
+def add_page(cat, title, url, views): # python, title, url
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url = url
     p.views = views
